@@ -1,0 +1,105 @@
+{
+  "$kind": "Microsoft.AdaptiveDialog",
+  "$designer": {
+    "id": "k1pCvc",
+    "name": "FeedbackDialog",
+    "description": "Sample dialog capturing user feedback with thumbs up/down input"
+  },
+  "autoEndDialog": true,
+  "defaultResultProperty": "dialog.result",
+  "triggers": [
+    {
+      "$kind": "Microsoft.OnBeginDialog",
+      "$designer": {
+        "name": "BeginDialog",
+        "description": "",
+        "id": "bs11zc"
+      },
+      "actions": [
+        {
+          "$kind": "Microsoft.ChoiceInput",
+          "$designer": {
+            "id": "sJDPBk"
+          },
+          "defaultLocale": "en-us",
+          "disabled": false,
+          "maxTurnCount": 3,
+          "alwaysPrompt": false,
+          "allowInterruptions": false,
+          "prompt": "${ChoiceInput_Prompt_sJDPBk()}",
+          "unrecognizedPrompt": "",
+          "invalidPrompt": "",
+          "defaultValueResponse": "",
+          "choiceOptions": {
+            "includeNumbers": true,
+            "inlineOrMore": ", or ",
+            "inlineOr": " or "
+          },
+          "choices": [
+            {
+              "value": "👍",
+              "synonyms": [
+                "yes"
+              ]
+            },
+            {
+              "value": "👎",
+              "synonyms": [
+                "no"
+              ]
+            },
+            {
+              "value": "Dismiss",
+              "synonyms": [
+                "skip"
+              ]
+            }
+          ],
+          "property": "user.feedbackResponse"
+        },
+        {
+          "$kind": "Microsoft.SwitchCondition",
+          "$designer": {
+            "id": "rPhgso"
+          },
+          "condition": "user.feedbackResponse",
+          "cases": [
+            {
+              "value": "👍",
+              "actions": [
+                {
+                  "$kind": "Microsoft.TelemetryTrackEventAction",
+                  "$designer": {
+                    "id": "SY1nAy"
+                  },
+                  "eventName": "FeedbackSubmitted",
+                  "properties": {
+                    "Rating": "true"
+                  }
+                }
+              ]
+            },
+            {
+              "value": "👎",
+              "actions": [
+                {
+                  "$kind": "Microsoft.TelemetryTrackEventAction",
+                  "$designer": {
+                    "id": "ALknzc"
+                  },
+                  "eventName": "FeedbackSubmitted",
+                  "properties": {
+                    "Rating": "false"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "generator": "FeedbackDialog.lg",
+  "recognizer": "FeedbackDialog.lu.qna",
+  "id": "FeedbackDialog"
+}

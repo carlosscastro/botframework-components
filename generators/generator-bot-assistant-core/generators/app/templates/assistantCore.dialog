@@ -281,6 +281,14 @@
           "top": 3,
           "isTest": false,
           "noAnswer": "${QnAMakerDialog_NoAnswer_cc7Yef()}"
+        },
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "xUoCOE"
+          },
+          "activityProcessed": true,
+          "dialog": "FeedbackDialog"
         }
       ]
     }
