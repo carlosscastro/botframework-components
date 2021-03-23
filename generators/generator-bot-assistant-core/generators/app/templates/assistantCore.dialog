@@ -33,12 +33,37 @@
               "condition": "string(dialog.foreach.value.id) != string(turn.Activity.Recipient.id)",
               "actions": [
                 {
-                  "$kind": "Microsoft.BeginDialog",
+                  "$kind": "Microsoft.IfCondition",
                   "$designer": {
-                    "id": "STCIf4"
+                    "id": "Y1t1k4"
                   },
-                  "activityProcessed": true,
-                  "dialog": "WelcomeDialog"
+                  "condition": "exists(user.greeted)",
+                  "actions": [
+                    {
+                      "$kind": "Microsoft.SendActivity",
+                      "$designer": {
+                        "id": "yXbfKT"
+                      },
+                      "activity": "${SendActivity_yXbfKT()}"
+                    }
+                  ],
+                  "elseActions": [
+                    {
+                      "$kind": "Microsoft.SendActivity",
+                      "$designer": {
+                        "id": "XZRD8m"
+                      },
+                      "activity": "${SendActivity_XZRD8m()}"
+                    },
+                    {
+                      "$kind": "Microsoft.SetProperty",
+                      "$designer": {
+                        "id": "eV86Nf"
+                      },
+                      "property": "user.greeted",
+                      "value": "true"
+                    }
+                  ]
                 }
               ]
             }
@@ -255,6 +280,24 @@
           "$designer": {
             "id": "Z0xhJ8"
           }
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "pRdAAf",
+        "name": "Feedback"
+      },
+      "intent": "Feedback",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "2pSztz"
+          },
+          "activityProcessed": true,
+          "dialog": "FeedbackDialog"
         }
       ]
     },

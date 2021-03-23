@@ -1,95 +1,115 @@
 [import](common.lg)
 
-# Ask_Activity_hBLUL0()
+# SendActivity_GstWEQ()
 [Activity
-    Attachments = ${Ask_Activity_hBLUL0_attachment_VM8VZh()}
+    Text = ${SendActivity_GstWEQ_text()}
+    Attachments = ${SendActivity_GstWEQ_attachment_N1EQ7u()}
 ]
 
-# Ask_Activity_hBLUL0_attachment_VM8VZh()
-- ```${json({
-  "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
-  "version": "1.2",
-  "type": "AdaptiveCard",
-"body": [
+# SendActivity_GstWEQ_text()
+- Did the experience meet your expectations?
+- Did the bot meet your expectations?
+- Did you like this interaction with the bot?
+
+# FeedbackTitle
+- Feedback
+
+# FeedbackHeader
+- ```
+{
+    "type": "Container",
+    "items": [
         {
-            "type": "Container",
-            "items": [
+            "type": "ColumnSet",
+            "columns": [
                 {
-                    "type": "TextBlock",
-                    "text": "Was this helpful?",
-                    "wrap": true
+                    "type": "Column",
+                    "width": 10,
+                    "spacing":"none",
+                    "verticalContentAlignment": "center",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "${CalendarIconUrl()}",
+                            "horizontalAlignment": "Center"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width":"90",
+                    "spacing":"small",
+                    "verticalContentAlignment": "center",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${FeedbackTitle()}",
+                            "size": "Large",
+                            "weight": "Bolder"
+                        }
+                    ]
                 }
             ]
+        }        
+    ]
+}
+```
+
+# LikeDislikeActions
+- ```
+{
+    "type": "ActionSet",
+    "actions": [
+        {
+            "type": "Action.Submit",
+            "title": "Like 👍",
+            "data": {
+                "intent": "Like"
+            }
         },
         {
-            "type": "ActionSet",
-            "actions": [
-                {
-                    "type": "Action.Submit",
-                    "title": "👍",
-                    "data": "👍"
-                },
-                {
-                    "type": "Action.Submit",
-                    "title": "👎",
-                    "data": "👎"
-                },
-                {
-                    "type": "Action.Submit",
-                    "title": "Dismiss",
-                    "data": "Dismiss"
-                }
-            ]
+            "type": "Action.Submit",
+            "title": "Dislike 👎",
+            "data": {
+                "intent": "Dislike"
+            }
+        },
+        {
+            "type": "Action.Submit",
+            "title": "Help",
+            "data": {
+                "intent": "Help"
+            }
         }
     ]
-})}```
-# Ask_Activity_gFOGE1()
-[Activity
-    Text = Was this helpful?
-    Attachments = ${Ask_Activity_gFOGE1_attachment_0dVh4m()}
-]
+}
+```
 
-# Ask_Activity_gFOGE1_attachment_0dVh4m()
-> To learn more Adaptive Cards format, read the documentation at
-> https://docs.microsoft.com/en-us/adaptive-cards/getting-started/bots
+# SendActivity_GstWEQ_attachment_N1EQ7u()
+> LikeDislike Feedback Card
 - ```${json({
   "$schema": "http://adaptivecards.io/schemas/adaptive-card.json",
   "version": "1.2",
   "type": "AdaptiveCard",
   "body": [
-        {
-            "type": "Container",
-            "items": [
-                {
-                    "type": "TextBlock",
-                    "text": "Was this helpful?",
-                    "wrap": true
-                }
-            ]
-        },
-        {
-            "type": "ActionSet",
-            "actions": [
-                {
-                    "type": "Action.Submit",
-                    "title": "👍",
-                    "data": "👍"
-                },
-                {
-                    "type": "Action.Submit",
-                    "title": "👎",
-                    "data": "👎"
-                },
-                {
-                    "type": "Action.Submit",
-                    "title": "Dismiss",
-                    "data": "Dismiss"
-                }
-            ]
-        }
+      json(FeedbackHeader()),
+      json(LikeDislikeActions())
     ]
 })}```
-# ChoiceInput_Prompt_sJDPBk()
+# SendActivity_a2TwNv()
 [Activity
-    Text = Was this helpful?
+    Text = ${SendActivity_a2TwNv_text()}
+]
+
+# SendActivity_a2TwNv_text()
+- ```You liked me!
+```
+# SendActivity_yOxFhJ()
+[Activity
+    Text = Thanks for the feedback
+]
+
+# SendActivity_dJtrYd()
+[Activity
+    Text = Thanks for the feedback
 ]
