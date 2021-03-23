@@ -1,0 +1,10 @@
+[import](common.lg)
+
+# SendActivity_YRvoei()
+[Activity
+    Text = Let's begin
+]
+
+# SendActivity_YRvoei_text()
+- Let's begin
+- 
