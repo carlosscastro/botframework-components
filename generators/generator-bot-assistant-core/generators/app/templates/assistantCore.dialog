@@ -49,6 +49,24 @@
     {
       "$kind": "Microsoft.OnIntent",
       "$designer": {
+        "id": "YQ6GAt",
+        "name": "Bot Tour"
+      },
+      "intent": "BotTour",
+      "actions": [
+        {
+          "$kind": "Microsoft.BeginDialog",
+          "$designer": {
+            "id": "6JAmBh"
+          },
+          "activityProcessed": true,
+          "dialog": "BotTourDialog"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
         "id": "nNAPMq",
         "name": "Cancel"
       },
