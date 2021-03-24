@@ -5,7 +5,7 @@
     "name": "BotTourDialog",
     "description": ""
   },
-  "autoEndDialog": true,
+  "autoEndDialog": false,
   "defaultResultProperty": "dialog.result",
   "triggers": [
     {
@@ -22,6 +22,29 @@
             "id": "YRvoei"
           },
           "activity": "${SendActivity_YRvoei()}"
+        }
+      ]
+    },
+    {
+      "$kind": "Microsoft.OnIntent",
+      "$designer": {
+        "id": "pzuSn9",
+        "name": "FocusCard"
+      },
+      "intent": "FocusCard",
+      "actions": [
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "Z5JucQ"
+          },
+          "activity": "${SendActivity_Z5JucQ()}"
+        },
+        {
+          "$kind": "Microsoft.EndDialog",
+          "$designer": {
+            "id": "xlyFV6"
+          }
         }
       ]
     }
