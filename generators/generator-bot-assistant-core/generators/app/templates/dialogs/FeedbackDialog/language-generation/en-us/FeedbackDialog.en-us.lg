@@ -30,7 +30,7 @@
                     "items": [
                         {
                             "type": "Image",
-                            "url": "${CalendarIconUrl()}",
+                            "url": "${FeedbackIconUrl()}",
                             "horizontalAlignment": "Center"
                         }
                     ]
@@ -55,25 +55,113 @@
 }
 ```
 
-# LikeDislikeActions
+# FeedbackBody
+- ```
+{
+            "type": "Container",
+            "items": [
+                {
+                    "type": "ColumnSet",
+                    "columns": [
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "items": [
+                                                {
+                                                    "type": "TextBlock",
+                                                    "text": "Like",
+                                                    "wrap": true,
+                                                    "horizontalAlignment": "Right"
+                                                }
+                                            ],
+                                            "horizontalAlignment": "Center",
+                                            "verticalContentAlignment": "Center",
+                                            "width": 70
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "items": [
+                                                {
+                                                    "type": "Image",
+                                                    "url": "${LikeIconUrl()}",
+                                                    "size": "Small",
+                                                    "horizontalAlignment": "Center"
+                                                }
+                                            ],
+                                            "verticalContentAlignment": "Center",
+                                            "width": 30
+                                        }
+                                    ]
+                                }
+                            ],
+                            "selectAction": {
+                                "type": "Action.Submit",
+                                "title": "Like",
+                                "data": {
+                                    "intent": "Like"
+                                }
+                            }
+                        },
+                        {
+                            "type": "Column",
+                            "width": "stretch",
+                            "items": [
+                                {
+                                    "type": "ColumnSet",
+                                    "columns": [
+                                        {
+                                            "type": "Column",
+                                            "horizontalAlignment": "Center",
+                                            "verticalContentAlignment": "Center",
+                                            "items": [
+                                                {
+                                                    "type": "Image",
+                                                    "url": "${DislikeIconUrl()}",
+                                                    "size": "Small",
+                                                    "horizontalAlignment": "Center"
+                                                }
+                                            ],
+                                            "width": 30
+                                        },
+                                        {
+                                            "type": "Column",
+                                            "verticalContentAlignment": "Center",
+                                            "items": [
+                                                {
+                                                    "type": "TextBlock",
+                                                    "text": "Dislike",
+                                                    "wrap": true
+                                                }
+                                            ],
+                                            "width": 70
+                                        }
+                                    ]
+                                }
+                            ],
+                            "selectAction": {
+                                "type": "Action.Submit",
+                                "title": "Dislike",
+                                "data": {
+                                    "intent": "Dislike"
+                                }
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+```
+# FeedbackActions
 - ```
 {
     "type": "ActionSet",
     "actions": [
-        {
-            "type": "Action.Submit",
-            "title": "Like 👍",
-            "data": {
-                "intent": "Like"
-            }
-        },
-        {
-            "type": "Action.Submit",
-            "title": "Dislike 👎",
-            "data": {
-                "intent": "Dislike"
-            }
-        },
         {
             "type": "Action.Submit",
             "title": "Help",
@@ -87,4 +175,13 @@
 
 # SendActivity_GstWEQ_attachment_N1EQ7u()
 > LikeDislike Feedback Card
-- ```${json(CardTemplateTwoComponents(FeedbackHeader(),LikeDislikeActions()))}```
+- ```${json(CardTemplate(FeedbackHeader(),FeedbackBody(),FeedbackActions()))}```
+
+# SendActivity_639pkl()
+[Activity
+    Text = ${SendActivity_639pkl_text()}
+]
+
+# SendActivity_639pkl_text()
+- Got it, thanks for the feedback.
+- Understood, thanks for the feedback.

@@ -53,8 +53,15 @@
           },
           "eventName": "FeedbackSubmitted",
           "properties": {
-            "Liked": "true"
+            "UserLiked": "true"
           }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "639pkl"
+          },
+          "activity": "${SendActivity_639pkl()}"
         },
         {
           "$kind": "Microsoft.EndDialog",
@@ -85,7 +92,9 @@
             "name": "Telemetry - Liked: false"
           },
           "eventName": "FeedbackSubmitted",
-          "properties": {}
+          "properties": {
+            "UserLiked": "false"
+          }
         },
         {
           "$kind": "Microsoft.EndDialog",

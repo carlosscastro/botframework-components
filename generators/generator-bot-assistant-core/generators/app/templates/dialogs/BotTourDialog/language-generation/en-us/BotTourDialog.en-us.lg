@@ -8,6 +8,12 @@
 # BotTourTitle
 - You can ask me...
 
+# BotTourContentTextShort
+- Praesent vel molestie tortor.
+
+# BotTourContentTextLong
+- Vivamus commodo sapien sed facilisis posuere. Nunc nec viverra mi. Proin ac felis in purus facilisis egestas.
+
 # BotTourHeader
 - ```
 {
@@ -24,7 +30,7 @@
                     "items": [
                         {
                             "type": "Image",
-                            "url": "${CalendarIconUrl()}",
+                            "url": "${BotTourIconUrl()}",
                             "horizontalAlignment": "Center"
                         }
                     ]
@@ -48,10 +54,6 @@
     ]
 }
 ```
-# BotTourContentText
-- Proin congue luctus efficitur. Aliquam vel sem sodales, finibus diam ut, viverra velit.
-- Vivamus commodo sapien sed facilisis posuere. Nunc nec viverra mi. Proin ac felis in purus facilisis egestas.
-- Praesent vel molestie tortor.
 
 # BotTourBody
 - ```
@@ -69,7 +71,7 @@
                     "items": [
                         {
                             "type": "Image",
-                            "url": "${CalendarIconUrl()}",
+                            "url": "${PlaceholderIconUrl()}",
                             "horizontalAlignment": "Center"
                         }
                     ]
@@ -82,8 +84,54 @@
                     "items": [
                         {
                             "type": "TextBlock",
-                            "text": "${BotTourContentText()}",
-                            "size": "Medium",
+                            "text": "${BotTourContentTextLong()}",
+                            "color": "accent",
+                            "size": "medium",
+                            "wrap": true
+                        }
+                    ]
+                }
+            ]
+        }        
+    ],
+    "selectAction":        {
+        "type": "Action.Submit",
+        "title": "FocusCard",
+        "data": {
+            "intent": "FocusCard"
+        }
+    }
+},
+{
+    "type": "Container",
+    "items": [
+        {
+            "type": "ColumnSet",
+            "columns": [
+                {
+                    "type": "Column",
+                    "width": 10,
+                    "spacing":"none",
+                    "verticalContentAlignment": "center",
+                    "items": [
+                        {
+                            "type": "Image",
+                            "url": "${PlaceholderIconUrl()}",
+                            "horizontalAlignment": "Center"
+                        }
+                    ]
+                },
+                {
+                    "type": "Column",
+                    "width":"90",
+                    "spacing":"small",
+                    "verticalContentAlignment": "center",
+                    "items": [
+                        {
+                            "type": "TextBlock",
+                            "text": "${BotTourContentTextShort()}",
+                            "color": "accent",
+                            "size": "medium",
                             "wrap": true
                         }
                     ]
@@ -117,7 +165,7 @@
                     "items": [
                         {
                             "type": "Image",
-                            "url": "${CalendarIconUrl()}",
+                            "url": "${PlaceholderIconUrl()}",
                             "horizontalAlignment": "Center"
                         }
                     ]
@@ -194,7 +242,7 @@
 
 # SendActivity_YRvoei_attachment_WGITEE()
 > Bot tour chevron card
-- ```${json(CardTemplateTwoComponents(BotTourHeader(),BotTourBody()))}```
+- ```${json(CardTemplate(BotTourHeader(), ExpandableListCardBody(createArray(BotTourBody(),BotTourBody(),BotTourBody(),BotTourBody()), 5), ''))}```
 
 # SendActivity_Z5JucQ()
 [Activity
