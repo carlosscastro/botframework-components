@@ -14,6 +14,13 @@
 # BotTourContentTextLong
 - Vivamus commodo sapien sed facilisis posuere. Nunc nec viverra mi. Proin ac felis in purus facilisis egestas.
 
+# BotTourFocusCardTitle
+- Header goes here
+
+# BotTourFocusCardText
+- Aenean at consectetur orci. [In hendrerit tortor magna](), et pharetra urna fringilla eget. Sed finibus consequat urna, sit amet mattis dui condimentum a. Quisque vel augue quam. Fusce et feugiat orci, nec rutrum lectus. Ut id ligula sed elit posuere laoreet ac in arcu. Etiam mauris lorem, porta et ante eu, bibendum aliquet lorem.
+
+
 # BotTourHeader
 - ```
 {
@@ -31,7 +38,7 @@
                         {
                             "type": "Image",
                             "url": "${BotTourIconUrl()}",
-                            "horizontalAlignment": "Center"
+                            "horizontalAlignment": "center"
                         }
                     ]
                 },
@@ -44,7 +51,7 @@
                         {
                             "type": "TextBlock",
                             "text": "${BotTourTitle()}",
-                            "size": "Large",
+                            "size": "large",
                             "weight": "Bolder"
                         }
                     ]
@@ -55,97 +62,50 @@
 }
 ```
 
-# BotTourBody
-- ```
+# BotTourBody(bodyText)
+-```
 {
-    "type": "Container",
-    "items": [
-        {
-            "type": "ColumnSet",
-            "columns": [
-                {
-                    "type": "Column",
-                    "width": 10,
-                    "spacing":"none",
-                    "verticalContentAlignment": "center",
-                    "items": [
-                        {
-                            "type": "Image",
-                            "url": "${PlaceholderIconUrl()}",
-                            "horizontalAlignment": "Center"
-                        }
-                    ]
-                },
-                {
-                    "type": "Column",
-                    "width":"90",
-                    "spacing":"small",
-                    "verticalContentAlignment": "center",
-                    "items": [
-                        {
-                            "type": "TextBlock",
-                            "text": "${BotTourContentTextLong()}",
-                            "color": "accent",
-                            "size": "medium",
-                            "wrap": true
-                        }
-                    ]
-                }
-            ]
-        }        
-    ],
-    "selectAction":        {
-        "type": "Action.Submit",
-        "title": "FocusCard",
-        "data": {
-            "intent": "FocusCard"
-        }
-    }
-},
-{
-    "type": "Container",
-    "items": [
-        {
-            "type": "ColumnSet",
-            "columns": [
-                {
-                    "type": "Column",
-                    "width": 10,
-                    "spacing":"none",
-                    "verticalContentAlignment": "center",
-                    "items": [
-                        {
-                            "type": "Image",
-                            "url": "${PlaceholderIconUrl()}",
-                            "horizontalAlignment": "Center"
-                        }
-                    ]
-                },
-                {
-                    "type": "Column",
-                    "width":"90",
-                    "spacing":"small",
-                    "verticalContentAlignment": "center",
-                    "items": [
-                        {
-                            "type": "TextBlock",
-                            "text": "${BotTourContentTextShort()}",
-                            "color": "accent",
-                            "size": "medium",
-                            "wrap": true
-                        }
-                    ]
-                }
-            ]
-        }        
-    ],
-    "selectAction":        {
-        "type": "Action.Submit",
-        "title": "FocusCard",
-        "data": {
-            "intent": "FocusCard"
-        }
-    }
+   "type":"Container",
+   "items":[
+      {
+         "type":"ColumnSet",
+         "columns":[
+            {
+               "type":"Column",
+               "items":[
+                  {
+                     "type":"Image",
+                     "url":"${PlaceholderIconUrl()}",
+                     "horizontalAlignment":"center"
+                  }
+               ],
+               "width":10
+            },
+            {
+               "type":"Column",
+               "width":90,
+               "items":[
+                  {
+                     "type":"TextBlock",
+                     "text":"${bodyText}",
+                     "wrap":true,
+                     "size":"medium",
+                     "maxLines":2,
+                     "color":"accent"
+                  }
+               ]
+            }
+         ]
+      }
+   ],
+   "selectAction":{
+      "type":"Action.Submit",
+      "title":"FocusCard",
+      "data":{
+         "intent":"FocusCard"
+      }
+   },
+   "separator": true
 }
 ```
 
@@ -166,7 +126,7 @@
                         {
                             "type": "Image",
                             "url": "${PlaceholderIconUrl()}",
-                            "horizontalAlignment": "Center"
+                            "horizontalAlignment": "center"
                         }
                     ]
                 },
@@ -179,7 +139,7 @@
                         {
                             "type": "TextBlock",
                             "text": "${BotTourFocusCardTitle()}",
-                            "size": "Large",
+                            "size": "large",
                             "weight": "Bolder"
                         }
                     ]
@@ -189,12 +149,6 @@
     ]
 }
 ```
-
-# BotTourFocusCardTitle
-- Header goes here
-
-# BotTourFocusCardText
-- Aenean at consectetur orci. [In hendrerit tortor magna](), et pharetra urna fringilla eget. Sed finibus consequat urna, sit amet mattis dui condimentum a. Quisque vel augue quam. Fusce et feugiat orci, nec rutrum lectus. Ut id ligula sed elit posuere laoreet ac in arcu. Etiam mauris lorem, porta et ante eu, bibendum aliquet lorem.
 
 # BotTourFocusCardBody 
 -```
@@ -242,7 +196,7 @@
 
 # SendActivity_YRvoei_attachment_WGITEE()
 > Bot tour chevron card
-- ```${json(CardTemplate(BotTourHeader(), ExpandableListCardBody(createArray(BotTourBody(),BotTourBody(),BotTourBody(),BotTourBody()), 5), ''))}```
+- ```${json(CardTemplate(BotTourHeader(), ExpandableListCardBody(createArray(BotTourBody(BotTourContentTextLong()),BotTourBody(BotTourContentTextShort()),BotTourBody(BotTourContentTextLong()),BotTourBody(BotTourContentTextShort()),BotTourBody(BotTourContentTextLong()),BotTourBody(BotTourContentTextShort()),BotTourBody(BotTourContentTextLong()),BotTourBody(BotTourContentTextShort())), 5), ''))}```
 
 # SendActivity_Z5JucQ()
 [Activity

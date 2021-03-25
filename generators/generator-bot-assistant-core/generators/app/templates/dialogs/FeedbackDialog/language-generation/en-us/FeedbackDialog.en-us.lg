@@ -65,7 +65,7 @@
                     "columns": [
                         {
                             "type": "Column",
-                            "width": "stretch",
+                            "width": 50,
                             "items": [
                                 {
                                     "type": "ColumnSet",
@@ -82,7 +82,7 @@
                                             ],
                                             "horizontalAlignment": "Center",
                                             "verticalContentAlignment": "Center",
-                                            "width": 70
+                                            "width": 50
                                         },
                                         {
                                             "type": "Column",
@@ -91,11 +91,11 @@
                                                     "type": "Image",
                                                     "url": "${LikeIconUrl()}",
                                                     "size": "Small",
-                                                    "horizontalAlignment": "Center"
+                                                    "horizontalAlignment": "left"
                                                 }
                                             ],
                                             "verticalContentAlignment": "Center",
-                                            "width": 30
+                                            "width": 50
                                         }
                                     ]
                                 }
@@ -110,7 +110,7 @@
                         },
                         {
                             "type": "Column",
-                            "width": "stretch",
+                            "width": 50,
                             "items": [
                                 {
                                     "type": "ColumnSet",
@@ -124,10 +124,10 @@
                                                     "type": "Image",
                                                     "url": "${DislikeIconUrl()}",
                                                     "size": "Small",
-                                                    "horizontalAlignment": "Center"
+                                                    "horizontalAlignment": "right"
                                                 }
                                             ],
-                                            "width": 30
+                                            "width": 50
                                         },
                                         {
                                             "type": "Column",
@@ -139,7 +139,7 @@
                                                     "wrap": true
                                                 }
                                             ],
-                                            "width": 70
+                                            "width": 50
                                         }
                                     ]
                                 }
@@ -185,3 +185,11 @@
 # SendActivity_639pkl_text()
 - Got it, thanks for the feedback.
 - Understood, thanks for the feedback.
+# SendActivity_YBCkGQ()
+[Activity
+    Text = ${SendActivity_YBCkGQ_text()}
+]
+
+# SendActivity_YBCkGQ_text()
+- Got it, thanks for the feedback.
+- Understood, thanks for providing feedback.

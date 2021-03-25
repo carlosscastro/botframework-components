@@ -49,7 +49,7 @@
           "$kind": "Microsoft.TelemetryTrackEventAction",
           "$designer": {
             "id": "jPnyCk",
-            "name": "Telemetry - Liked: true"
+            "name": "Telemetry - UserLiked: true"
           },
           "eventName": "FeedbackSubmitted",
           "properties": {
@@ -89,12 +89,19 @@
           "$kind": "Microsoft.TelemetryTrackEventAction",
           "$designer": {
             "id": "ENnqza",
-            "name": "Telemetry - Liked: false"
+            "name": "Telemetry - UserLiked: false"
           },
           "eventName": "FeedbackSubmitted",
           "properties": {
             "UserLiked": "false"
           }
+        },
+        {
+          "$kind": "Microsoft.SendActivity",
+          "$designer": {
+            "id": "YBCkGQ"
+          },
+          "activity": "${SendActivity_YBCkGQ()}"
         },
         {
           "$kind": "Microsoft.EndDialog",
