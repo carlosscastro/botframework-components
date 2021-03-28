@@ -30,6 +30,7 @@ jobs:
       - name: Log SDK version
         run: |
           echo "Using bot builder SDK version ${{ github.event.inputs.botbuilderVersion }}"
+          ls
 
       # Checks-out your repository under $GITHUB_WORKSPACE, so the job can access it
       - uses: actions/checkout@v2
@@ -47,4 +48,23 @@ jobs:
         run: |
           yo generators/generator-bot-command-list/generators/app/index.js 'testbot' '${{ github.event.inputs.botbuilderVersion }}'
           
+      - name: Dotnet build generator
+        working-directory: ./tmp/testbot
+        run: |
+          dotnet build testbot.csproj
       
+      - name: Dotnet run generator in 3978
+        working-directory: ./tmp/testbot
+        run: |
+          dotnet run --project testbot.csproj
+          
+      - name: Dotnet run generator in 3978
+        working-directory: ./tmp/testbot
+        run: |
+          dotnet run --project testbot.csproj &
+          sleep 10
+          
+      - name: Dotnet build test project
+        working-directory: ./tmp/testbot
+        run: |
+          dotnet build testbot.csproj
