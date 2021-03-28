@@ -44,9 +44,8 @@ jobs:
           yarn install
           
       - name: Invoke generator
-        working-directory: ./tmp
         run: |
-          yo generators/generator-bot-command-list/generators/app/index.js 'testbot' '${{ github.event.inputs.botbuilderVersion }}'
+          yo ./generators/generator-bot-command-list/generators/app/index.js 'testbot' '${{ github.event.inputs.botbuilderVersion }}'
           
       - name: Dotnet build generator
         working-directory: ./tmp/testbot
