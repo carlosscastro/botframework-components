@@ -38,6 +38,10 @@ jobs:
       - name: Use Node.js '14.x'
         uses: actions/setup-node@v1
         
+      - name: Install yeoman
+        run: |
+          npm install -g yo
+        
       - name: Install generator
         working-directory: ./generators/generator-bot-command-list
         run: |
