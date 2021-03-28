@@ -38,11 +38,6 @@ jobs:
       - name: Use Node.js '14.x'
         uses: actions/setup-node@v1
         
-      - name: Setup .NET Core SDK 3.0
-        uses: actions/setup-dotnet@v1.7.2
-        with:
-          dotnet-version: 3.0
-        
       - name: Install yeoman
         run: |
           npm install -g yo
