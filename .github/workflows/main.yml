@@ -58,11 +58,11 @@ jobs:
           
       - name: Dotnet build generator
         run: |
-          dotnet build testbot.csproj
+          dotnet build testbot/testbot.csproj
       
       - name: Dotnet run generator in 3978
         run: |
-          dotnet run --project testbot.csproj
+          dotnet run --project testbot/testbot.csproj
           
       - name: Dotnet run generator in 3978
         run: |
