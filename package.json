@@ -5,7 +5,8 @@
     "generators/*",
     "packages/*",
     "skills/declarative/*",
-    "testing/*"
+    "testing/*",
+    "test/*"
   ],
   "scripts": {
     "lint": "yarn workspaces foreach run lint"
