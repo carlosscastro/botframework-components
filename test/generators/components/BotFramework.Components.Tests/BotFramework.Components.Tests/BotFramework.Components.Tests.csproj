@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Microsoft.Bot.Builder" Version="4.13.0-daily.20210327.228178.2d51159" />
-    <PackageReference Include="Microsoft.Bot.Schema" Version="4.13.0-daily.20210327.228178.2d51159" />
+    <PackageReference Include="Microsoft.Bot.Builder" Version="$(BotBuilderVersion)" />
+    <PackageReference Include="Microsoft.Bot.Schema" Version="$(BotBuilderVersion)" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="16.5.0" />
     <PackageReference Include="xunit" Version="2.4.0" />
     <PackageReference Include="xunit.runner.visualstudio" Version="2.4.0" />
