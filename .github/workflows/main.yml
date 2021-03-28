@@ -53,6 +53,7 @@ jobs:
           
       - name: Dotnet build generator
         run: |
+          dotnet nuget add source https://botbuilder.myget.org/F/botbuilder-v4-dotnet-daily/api/v3/index.json
           dotnet build testbot/testbot.csproj
       
       - name: Dotnet run generator in 3978
@@ -67,6 +68,7 @@ jobs:
       - name: Dotnet build test project
         working-directory: ./generators/components/BotFramework.Components.Tests/BotFramework.Components.Tests
         run: |
+          dotnet nuget add source https://botbuilder.myget.org/F/botbuilder-v4-dotnet-daily/api/v3/index.json
           dotnet build BotFramework.Components.Tests.csproj
           
       - name: Dotnet build test project
