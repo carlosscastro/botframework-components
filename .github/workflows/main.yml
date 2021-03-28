@@ -43,6 +43,7 @@ jobs:
         run: |
           dotnet nuget add source https://botbuilder.myget.org/F/botbuilder-v4-dotnet-daily/api/v3/index.json
           dotnet build BotFramework.Components.TestComponents.csproj -property:BotBuilderVersion=${{ github.event.inputs.botbuilderVersion }}
+          dotnet nuget add source './test/generators/components/BotFramework.Components.Tests/BotFramework.Components.TestComponents/outputpackages'
         
       - name: Install yeoman
         run: |
