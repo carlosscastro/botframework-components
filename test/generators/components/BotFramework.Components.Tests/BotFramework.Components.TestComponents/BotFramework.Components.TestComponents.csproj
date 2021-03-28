@@ -9,6 +9,7 @@
   <ItemGroup>
     <PackageReference Include="Microsoft.Bot.Builder" Version="$(BotBuilderVersion)" />
     <PackageReference Include="Microsoft.Bot.Builder.Dialogs" Version="$(BotBuilderVersion)" />
+    <PackageReference Include="Microsoft.Bot.Builder.Dialogs.Declarative" Version="$(BotBuilderVersion)" />
     <PackageReference Include="Microsoft.Bot.Builder.Integration.AspNet.Core" Version="$(BotBuilderVersion)" />
   </ItemGroup>
 
