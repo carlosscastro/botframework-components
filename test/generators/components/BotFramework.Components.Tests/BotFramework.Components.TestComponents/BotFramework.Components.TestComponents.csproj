@@ -3,7 +3,7 @@
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
-    <PackageOutputPath>$(MSBuildThisFileDirectory)../outputpackages</PackageOutputPath>
+    <PackageOutputPath>outputpackages</PackageOutputPath>
   </PropertyGroup>
 
   <ItemGroup>
