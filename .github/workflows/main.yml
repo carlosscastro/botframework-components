@@ -48,22 +48,24 @@ jobs:
           yo ./generators/generator-bot-command-list/generators/app/index.js 'testbot' '${{ github.event.inputs.botbuilderVersion }}'
           
       - name: Dotnet build generator
-        working-directory: ./tmp/testbot
         run: |
           dotnet build testbot.csproj
       
       - name: Dotnet run generator in 3978
-        working-directory: ./tmp/testbot
         run: |
           dotnet run --project testbot.csproj
           
       - name: Dotnet run generator in 3978
-        working-directory: ./tmp/testbot
         run: |
           dotnet run --project testbot.csproj &
           sleep 10
           
       - name: Dotnet build test project
-        working-directory: ./tmp/testbot
+        working-directory: ./generators/components/BotFramework.Components.Tests/BotFramework.Components.Tests
         run: |
-          dotnet build testbot.csproj
+          dotnet build BotFramework.Components.Tests.csproj
+          
+      - name: Dotnet build test project
+        working-directory: ./generators/components/BotFramework.Components.Tests/BotFramework.Components.Tests
+        run: |
+          dotnet test BotFramework.Components.Tests.csproj
