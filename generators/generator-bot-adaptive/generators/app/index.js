@@ -67,6 +67,7 @@ module.exports = class extends BaseGenerator {
           defaultSettingsDirectory: 'string.Empty',
           includeAssets,
           templateContext: {
+            botbuilderVersion: this.options.botbuilderVersion,
             packageReferences: this._formatDotnetPackageReferences(
               this.packageReferences
             ),
@@ -134,7 +135,7 @@ module.exports = class extends BaseGenerator {
   }
 
   _copyDotnetProjectFile() {
-    const { botName } = this.options;
+    const { botName, botbuilderVersion } = this.options;
 
     this.fs.move(
       this.destinationPath(botName, 'botName.csproj'),

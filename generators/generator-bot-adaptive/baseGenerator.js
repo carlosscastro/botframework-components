@@ -17,6 +17,12 @@ module.exports = class extends Generator {
       required: true,
     });
 
+    this.argument('botbuilderVersion', {
+      type: String,
+      required: false,
+      default: '4.12.1-preview',
+    });
+
     this.option('platform', {
       desc: `The programming platform to use, one of: ${Object.keys(
         platforms
@@ -53,8 +59,9 @@ module.exports = class extends Generator {
 
   _copyBotTemplateFiles({ path = ['**', '*.*'], templateContext = {} } = {}) {
     const { botName } = this.options;
-
-    const context = Object.assign({}, templateContext, { botName });
+    const context = Object.assign({}, templateContext, {
+      botName,
+    });
 
     for (const filePath of this._selectTemplateFilePaths(...path)) {
       this.fs.copyTpl(
