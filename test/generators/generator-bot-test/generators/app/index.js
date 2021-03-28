@@ -16,6 +16,7 @@ module.exports = class extends BaseGenerator {
           {
             name: 'BotFramework.Components.TestComponents',
             version: '1.0.0',
+            isPlugin: true,
           },
         ],
         modifyApplicationSettings: (appSettings) => {

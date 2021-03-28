@@ -188,7 +188,7 @@ module.exports = class extends BaseGenerator {
 
     for (const { isPlugin, name, settingsPrefix } of this.packageReferences) {
       if (isPlugin) {
-        appSettings.runtimeSettings.plugins.push({
+        appSettings.runtimeSettings.components.push({
           name,
           settingsPrefix: settingsPrefix || name,
         });
