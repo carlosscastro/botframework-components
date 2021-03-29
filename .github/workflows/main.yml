@@ -58,10 +58,11 @@ jobs:
       - name: Invoke generator
         run: |
           yo ./test/generators/generator-bot-test/generators/app/index.js 'testbot' '${{ github.event.inputs.botbuilderVersion }}'
+          echo testbot/testbot.csproj
           
       - name: Dotnet build generator
         run: |
-          dotnet build testbot/testbot.csproj
+          dotnet build testbot/testbot.csproj -property:BotBuilderVersion=${{ github.event.inputs.botbuilderVersion }}
       
       - name: Dotnet run generator in 3978
         run: |
