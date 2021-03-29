@@ -43,6 +43,8 @@ jobs:
         run: |
           dotnet nuget add source https://botbuilder.myget.org/F/botbuilder-v4-dotnet-daily/api/v3/index.json
           dotnet build BotFramework.Components.TestComponents.csproj -property:BotBuilderVersion=${{ github.event.inputs.botbuilderVersion }}
+          dotnet nuget add source '/home/runner/work/botframework-components/botframework-components/test/generators/components/BotFramework.Components.Tests/BotFramework.Components.TestComponents/outputpackages'
+          dotnet nuget list source
         
       - name: Install yeoman
         run: |
@@ -56,10 +58,11 @@ jobs:
       - name: Invoke generator
         run: |
           yo ./test/generators/generator-bot-test/generators/app/index.js 'testbot' '${{ github.event.inputs.botbuilderVersion }}'
+          cat testbot/testbot.csproj
           
       - name: Dotnet build generator
         run: |
-          dotnet build testbot/testbot.csproj
+          dotnet build testbot/testbot.csproj -property:BotBuilderVersion=${{ github.event.inputs.botbuilderVersion }}
       
       - name: Dotnet run generator in 3978
         run: |
