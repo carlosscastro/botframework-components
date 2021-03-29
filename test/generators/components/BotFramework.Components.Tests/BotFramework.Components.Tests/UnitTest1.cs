@@ -1,6 +1,7 @@
 using Microsoft.Bot.Builder;
 using Microsoft.Bot.Schema;
 using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Linq;
 using System.Net.Http;
@@ -34,8 +35,18 @@ namespace BotFramework.Components.Tests
 
                 Assert.True(response.IsSuccessStatusCode);
                 var body = await response.Content.ReadAsStringAsync();
-                var invokeResponse = JsonConvert.DeserializeObject<InvokeResponse<ExpectedReplies>>(body);
-                Assert.Equal("EchoActivity: hello", invokeResponse.Body.Activities.First(a => a.Type == ActivityTypes.Message).Text);
+                var invokeResponse = JsonConvert.DeserializeObject<ExpectedReplies>(body);
+                Assert.Equal("EchoActivity: hello", invokeResponse.Activities.First(a => a.Type == ActivityTypes.Message).Text);
+            }
+
+            using (var client = new HttpClient())
+            {
+                var response = await client.PostAsync("http://localhost:3978/api/adaptertest", new StringContent(JsonConvert.SerializeObject(conversationUpdate)));
+
+                Assert.True(response.IsSuccessStatusCode);
+                var body = await response.Content.ReadAsStringAsync();
+                var invokeResponse = JsonConvert.DeserializeObject<ExpectedReplies>(body);
+                Assert.Equal("EchoActivity: hello", invokeResponse.Activities.First(a => a.Type == ActivityTypes.Message).Text);
             }
         }
     }
