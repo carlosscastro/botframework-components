@@ -26,7 +26,7 @@ namespace BotFramework.Components.Tests
 
         private async Task TestCustomAction(string endpoint)
         {
-             conversationUpdate = Activity.CreateMessageActivity();
+            var conversationUpdate = Activity.CreateMessageActivity();
             conversationUpdate.ServiceUrl = "http://localhost:3979";
             conversationUpdate.ChannelId = "emulator";
             conversationUpdate.Conversation = new ConversationAccount(id: Guid.NewGuid().ToString());
