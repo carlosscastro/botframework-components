@@ -22,7 +22,8 @@ module.exports = class extends BaseGenerator {
         modifyApplicationSettings: (appSettings) => {
           appSettings.runtimeSettings.adapters = [
             {
-              name: 'BotFramework.Components.TestComponents.SimpleHttpAdapter',
+              name: 'FriendlyName.SimpleHttpAdapter',
+              type: 'BotFramework.Components.TestComponents.SimpleHttpAdapter',
               route: 'adaptertest',
             },
           ];

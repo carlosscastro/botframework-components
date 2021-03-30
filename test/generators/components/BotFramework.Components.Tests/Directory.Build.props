@@ -1,5 +1,5 @@
 <Project>
   <PropertyGroup>
-    <BotBuilderVersion>4.12.1</BotBuilderVersion>
+    <BotBuilderVersion>4.13-rc0</BotBuilderVersion>
   </PropertyGroup>
 </Project>
