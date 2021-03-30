@@ -13,35 +13,31 @@ namespace BotFramework.Components.Tests
     public class UnitTest1
     {
         [Fact]
-        public async Task Test1()
+        public async Task TestCustomAction_MessagesEndpoint()
         {
-            //var conversationUpdate = Activity.CreateConversationUpdateActivity();
-            var conversationUpdate = Activity.CreateMessageActivity();
+            await TestCustomAction("http://localhost:3978/api/messages");
+        }
+
+        [Fact]
+        public async Task TestCustomAction_MessagesEndpoint()
+        {
+            await TestCustomAction("http://localhost:3978/api/adaptertest");
+        }
+
+        private async Task TestCustomAction(string endpoint)
+        {
+             conversationUpdate = Activity.CreateMessageActivity();
             conversationUpdate.ServiceUrl = "http://localhost:3979";
             conversationUpdate.ChannelId = "emulator";
             conversationUpdate.Conversation = new ConversationAccount(id: Guid.NewGuid().ToString());
             conversationUpdate.From = new ChannelAccount(id: "Ash");
             conversationUpdate.Text = "hello";
-            //conversationUpdate.MembersAdded = new ChannelAccount[]
-            //{
-            //    new ChannelAccount(Guid.NewGuid().ToString(), "Bender")
-            //};
 
             (conversationUpdate as Activity).DeliveryMode = DeliveryModes.ExpectReplies;
 
             using (var client = new HttpClient())
             {
-                var response = await client.PostAsync("http://localhost:3978/api/messages", new StringContent(JsonConvert.SerializeObject(conversationUpdate)));
-
-                Assert.True(response.IsSuccessStatusCode);
-                var body = await response.Content.ReadAsStringAsync();
-                var invokeResponse = JsonConvert.DeserializeObject<ExpectedReplies>(body);
-                Assert.Equal("EchoActivity: hello", invokeResponse.Activities.First(a => a.Type == ActivityTypes.Message).Text);
-            }
-
-            using (var client = new HttpClient())
-            {
-                var response = await client.PostAsync("http://localhost:3978/api/adaptertest", new StringContent(JsonConvert.SerializeObject(conversationUpdate)));
+                var response = await client.PostAsync(endpoint, new StringContent(JsonConvert.SerializeObject(conversationUpdate)));
 
                 Assert.True(response.IsSuccessStatusCode);
                 var body = await response.Content.ReadAsStringAsync();

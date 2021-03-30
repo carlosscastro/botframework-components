@@ -12,7 +12,7 @@ namespace BotFramework.Components.TestComponents
 {
     public class TestBotComponent : BotComponent
     {
-        public override void ConfigureServices(IServiceCollection services, IConfiguration configuration, ILogger logger)
+        public override void ConfigureServices(IServiceCollection services, IConfiguration configuration)
         {
             services.AddSingleton<DeclarativeType>(new DeclarativeType<EchoActivity>(EchoActivity.Kind));
             services.AddSingleton<IBotFrameworkHttpAdapter, SimpleHttpAdapter>();
