@@ -19,7 +19,7 @@ namespace BotFramework.Components.Tests
         }
 
         [Fact]
-        public async Task TestCustomAction_MessagesEndpoint()
+        public async Task TestCustomAction_CustomAdapterEndpoint()
         {
             await TestCustomAction("http://localhost:3978/api/adaptertest");
         }
