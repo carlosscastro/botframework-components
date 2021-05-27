@@ -12,9 +12,8 @@ namespace Microsoft.Bot.Components.Graph
     /// <summary>
     /// Client to call MS Graph service.
     /// </summary>
-    public class MSGraphClient
+    public static class MSGraphClient
     {
-#if DEBUG
         private static IGraphServiceClient clientOverride;
 
         /// <summary>
@@ -25,7 +24,6 @@ namespace Microsoft.Bot.Components.Graph
         {
             MSGraphClient.clientOverride = client;
         }
-#endif
 
         /// <summary>
         /// Gets the authenticated <see cref="GraphServiceClient"/>.
@@ -35,12 +33,11 @@ namespace Microsoft.Bot.Components.Graph
         /// <returns>Instance of <see cref="GraphServiceClient"/>.</returns>
         public static IGraphServiceClient GetAuthenticatedClient(string accessToken, HttpClient httpClient)
         {
-#if DEBUG
             if (clientOverride != null)
             {
                 return clientOverride;
             }
-#endif
+
             var client = new GraphServiceClient(httpClient);
             client.AuthenticationProvider = new DelegateAuthenticationProvider(
                     async (requestMessage) =>
@@ -50,7 +47,7 @@ namespace Microsoft.Bot.Components.Graph
 
                         // Get event times in the current time zone.
                         requestMessage.Headers.Add("Prefer", "outlook.timezone=\"" + TimeZoneInfo.Utc.Id + "\"");
-                        await Task.CompletedTask;
+                        await Task.CompletedTask.ConfigureAwait(false);
                     });
 
             return client;

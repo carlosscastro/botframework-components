@@ -42,6 +42,12 @@ namespace Microsoft.Bot.Component.Graph.Actions
         [JsonProperty("UserId")]
         public StringExpression UserId { get; set; }
 
+        /// <summary>
+        /// Gets or sets the properties to select from the Graph API.
+        /// </summary>
+        [JsonProperty("PropertiesToSelect")]
+        public ArrayExpression<string> PropertiesToSelect { get; set; }
+
         /// <inheritdoc/>
         public override string DeclarativeType => GetPeers.GetPeersDeclarativeType;
 
@@ -50,17 +56,18 @@ namespace Microsoft.Bot.Component.Graph.Actions
         {
             // Get the user's manager
             GetManager managerAction = new GetManager();
-            DirectoryObject manager = await managerAction.CallGraphServiceWithResultAsync(client, parameters, cancellationToken);
+            DirectoryObject manager = await managerAction.CallGraphServiceWithResultAsync(client, parameters, cancellationToken).ConfigureAwait(false);
 
             // Now get the manager's direct report to get the user's peers
             var newParameters = new Dictionary<string, object>(StringComparer.OrdinalIgnoreCase)
             {
                 { "UserId", manager.Id },
                 { "MaxResults", parameters["MaxResults"] },
+                { "PropertiesToSelect", parameters["PropertiesToSelect"] },
             };
 
             GetDirectReports directReportActions = new GetDirectReports();
-            IEnumerable<DirectoryObject> result = await directReportActions.CallGraphServiceWithResultAsync(client, newParameters, cancellationToken);
+            IEnumerable<DirectoryObject> result = await directReportActions.CallGraphServiceWithResultAsync(client, newParameters, cancellationToken).ConfigureAwait(false);
 
             return result.Where(obj => obj.Id != (string)parameters["UserId"]);
         }
@@ -70,7 +77,7 @@ namespace Microsoft.Bot.Component.Graph.Actions
         {
             if (this.UserId == null)
             {
-                throw new ArgumentNullException(nameof(this.UserId));
+                throw new InvalidOperationException($"GetPeers requires UserId property.");
             }
 
             int maxCount = DefaultMaxCount;
@@ -81,10 +88,24 @@ namespace Microsoft.Bot.Component.Graph.Actions
                 maxCount = this.MaxCount.GetValue(state);
             }
 
+            // Select minimum of the "id" field from the object
+            string propertiesToSelect = DefaultIdField;
+
+            if (this.PropertiesToSelect != null)
+            {
+                List<string> propertiesFound = this.PropertiesToSelect.GetValue(state);
+
+                if (propertiesFound != null && propertiesFound.Count > 0)
+                {
+                    propertiesToSelect = string.Join(",", propertiesFound);
+                }
+            }
+
             string userId = this.UserId.GetValue(state);
 
             parameters.Add("UserId", userId);
             parameters.Add("MaxResults", maxCount);
+            parameters.Add("PropertiesToSelect", propertiesToSelect);
         }
 
         /// <inheritdoc />
