@@ -8,7 +8,8 @@
       "methods": [
         "get",
         "post"
-      ]
+      ],
+      "route": "api/{route}"
     },
     {
       "type": "http",
@@ -16,6 +17,6 @@
       "name": "res"
     }
   ],
-  "scriptFile": "../triggers.js",
+  "scriptFile": "../index.js",
   "entryPoint": "messageTrigger"
 }

@@ -17,10 +17,11 @@ namespace <%= botName %>
             Host.CreateDefaultBuilder(args)
                 .ConfigureAppConfiguration((hostingContext, builder) =>
                 {
-                    string applicationRoot = AppDomain.CurrentDomain.BaseDirectory;
-                    string settingsDirectory = <%- settingsDirectory %>;
+                    var applicationRoot = AppDomain.CurrentDomain.BaseDirectory;
+                    var environmentName = hostingContext.HostingEnvironment.EnvironmentName;
+                    var settingsDirectory = <%- settingsDirectory %>;
 
-                    builder.AddBotRuntimeConfiguration(applicationRoot, settingsDirectory);
+                    builder.AddBotRuntimeConfiguration(applicationRoot, settingsDirectory, environmentName);
 
                     builder.AddCommandLine(args);
                 })

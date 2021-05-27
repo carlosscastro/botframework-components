@@ -1,41 +1,56 @@
 # @microsoft/generator-bot-enterprise-assistant [![NPM version][npm-image]][npm-url]
-> Yeoman generator for creating an Adaptive bot built on the Azure Bot Framework using the Enterprise Assistant template.
 
-## Installation
+A bot with Azure Language Understanding (LUIS), Enterprise Calendar skill, Enterprise People skill and common trigger phrases used to direct the conversation flow to help customers accomplish common business tasks. [Learn more](https://aka.ms/EnterpriseAssistant)
 
-First, install [Yeoman](http://yeoman.io) and @microsoft/generator-bot-enterprise-assistant using [npm](https://www.npmjs.com/) (we assume you have pre-installed [node.js](https://nodejs.org/)).
+### Recommended use
 
-```bash
-npm install -g yo
-npm install -g @microsoft/generator-bot-enterprise-assistant
-```
+- Create a sophisticated bot
+- Customize and extend sophisticated example dialogs, bot logic, language understanding and bot responses
+- Enterprise assistant-style bots that use Office 365 features
 
-Then generate your new project:
+### Included capabilities
 
-```bash
-yo @microsoft/bot-assistant-core '{BOT_NAME}'
-```
+- [Enterprise Calendar Bot](https://aka.ms/EnterpriseCalendarBot)
+- [Enterprise People Bot](https://aka.ms/EnterprisePeopleBot)
+- Greeting new and returning users
+- Bot Framework Orchestrator to direct the conversation flow
+- Chit chat with QnA Maker ([professional personality](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/how-to/chit-chat-knowledge-base?tabs=v1))
+- Asking for help
+- Disambiguation when multiple intents are recognized
+- Cancelling a dialog
+- Error handling
+- Repeat previous question
+- Getting customer feedback
 
-## Packages
-Adaptive bots can utilize the [Azure Bot Framework component model](https://aka.ms/ComponentTemplateDocumentation) to extend their base functionality. The following component packages are included:
+### Included packages
 
-- N/A
+- [Help and Cancel Intent Handling](https://www.nuget.org/packages/Microsoft.Bot.Components.HelpAndCancel/)
+- [Bot Framework Orchestrator](https://www.nuget.org/packages/Microsoft.Bot.Builder.AI.Orchestrator/)
 
-## Languages
-English.
+The Enterprise Assistant Bot uses packages to extend its capabilities. [Learn more](https://aka.ms/ComponentTemplateDocumentation).
 
-## Azure Resource Deployment
-This template does not rely on any additional Azure Resources.
+### Required Azure resources
 
-## Getting To Know Yeoman
+- Azure Bot Service Registration configured with Microsoft Azure Active Directory authentication with access to the following scopes:
+    - Calendars.ReadWrite
+    - Contacts.Read
+    - Directory.Read.All
+    - People.Read
+    - People.Read.All
+    - User.ReadBasic.All
+    - User.Read.All
+- [Azure Language Understanding (LUIS)][luis], or another recognizer of your choice
+- [Azure QnA Maker](https://docs.microsoft.com/en-us/azure/cognitive-services/qnamaker/overview/overview)
+- A storage solution for persistent state storage like Azure Cosmos DB
 
- * Yeoman has a heart of gold.
- * Yeoman is a person with feelings and opinions, but is very easy to work with.
- * Yeoman can be too opinionated at times but is easily convinced not to be.
- * Feel free to [learn more about Yeoman](http://yeoman.io/).
+### Supported Languages
 
-## License
-Copyright (c) Microsoft Corporation. All rights reserved.
+- English (en-US)
 
+### License
+
+[MIT License](https://github.com/microsoft/botframework-components/blob/main/LICENSE)
+
+[luis]: https://docs.microsoft.com/en-us/azure/cognitive-services/luis/what-is-luis
 [npm-image]: https://badge.fury.io/js/%40microsoft%2Fgenerator-bot-enterprise-assistant.svg
 [npm-url]: https://www.npmjs.com/package/@microsoft/generator-bot-enterprise-assistant

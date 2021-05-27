@@ -1,8 +1,8 @@
 // Copyright (c) Microsoft Corporation.
 // Licensed under the MIT License.
 
+const path = require('path');
 const rt = require('runtypes');
-const xml2js = require('xml2js');
 const { BaseGenerator, integrations, platforms } = require('../../index');
 const { v4: uuidv4 } = require('uuid');
 
@@ -108,10 +108,19 @@ module.exports = class extends BaseGenerator {
         ? `"${this.applicationSettingsDirectory}"`
         : defaultSettingsDirectory;
 
+    const settingsIncludePath =
+      this.applicationSettingsDirectory != null
+        ? path.join(this.applicationSettingsDirectory, path.sep)
+        : '';
+
     this.fs.copyTpl(
       this.templatePath(platform, integration),
       this.destinationPath(botName),
-      Object.assign({}, templateContext, { botName, settingsDirectory })
+      Object.assign({}, templateContext, {
+        botName,
+        settingsDirectory,
+        settingsIncludePath,
+      })
     );
 
     for (const path of includeAssets) {
@@ -167,12 +176,8 @@ module.exports = class extends BaseGenerator {
   }
 
   _writeApplicationSettings() {
-    const {
-      applicationSettingsDirectory = '.',
-      botName,
-      integration,
-      platform,
-    } = this.options;
+    const { botName, integration, platform } = this.options;
+    const { applicationSettingsDirectory = '.' } = this;
 
     const appSettings = this.fs.readJSON(
       this.templatePath('assets', 'appsettings.json')
@@ -181,10 +186,27 @@ module.exports = class extends BaseGenerator {
     appSettings.luis.name = botName;
 
     appSettings.runtime.key = `adaptive-runtime-${platform}-${integration}`;
-    appSettings.runtime.command = {
-      [platforms.dotnet]: `dotnet run --project ${botName}.csproj`,
-      [platforms.js]: 'node index.js',
-    }[platform];
+
+    switch (platform) {
+      case platforms.dotnet:
+        switch (integration) {
+          case integrations.functions:
+            appSettings.runtime.command = `func start --script-root ${path.join(
+              'bin',
+              'Debug',
+              'netcoreapp3.1'
+            )}`;
+            break;
+          default:
+            appSettings.runtime.command = `dotnet run --project ${botName}.csproj`;
+        }
+        break;
+      case platforms.js:
+        appSettings.runtime.command = 'npm run dev --';
+        break;
+      default:
+        this.env.error(`Unreachable : Unrecognized platform '${platform}'`);
+    }
 
     for (const { isPlugin, name, settingsPrefix } of this.packageReferences) {
       if (isPlugin) {
@@ -228,37 +250,38 @@ module.exports = class extends BaseGenerator {
   _writeJsPackageJson() {
     const { botName, integration } = this.options;
 
+    const sdkVersion = '4.13.4-preview';
+
     const dependencies = {
       [integrations.functions]: {
-        'botbuilder-runtime-integration-azure-functions': 'next',
+        'botbuilder-dialogs-adaptive-runtime-integration-azure-functions': sdkVersion,
       },
       [integrations.webapp]: {
-        'botbuilder-runtime-integration-restify': 'next',
+        'botbuilder-dialogs-adaptive-runtime-integration-express': sdkVersion,
       },
     }[integration];
-
-    const devDependencies =
-      {
-        // Note: in dev we need a server for testing bots via Composer
-        [integrations.functions]: {
-          'botbuilder-runtime-integration-restify': 'next',
-        },
-      }[integration] || {};
 
     this.fs.writeJSON(this.destinationPath(botName, 'package.json'), {
       name: botName,
       private: true,
       scripts: {
-        start: 'node index.js',
+        dev: {
+          [integrations.functions]: 'cross-env NODE_ENV=dev func start',
+          [integrations.webapp]: 'cross-env NODE_ENV=dev node index.js',
+        }[integration],
       },
       dependencies: Object.assign(
+        {
+          'cross-env': 'latest',
+          'botbuilder-ai-luis': sdkVersion,
+          'botbuilder-ai-qna': sdkVersion,
+        },
         this.packageReferences.reduce(
           (acc, { name, version }) => Object.assign(acc, { [name]: version }),
           {}
         ),
         dependencies
       ),
-      devDependencies,
     });
   }
 };

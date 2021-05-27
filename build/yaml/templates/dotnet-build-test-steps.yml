@@ -1,0 +1,22 @@
+steps:
+- task: DotNetCoreCLI@2
+  displayName: 'Run `dotnet restore`'
+  inputs:
+    command: restore
+    projects: '$(WorkingDirectory)\*.csproj'
+    feedsToUse: config
+    nugetConfigPath: packages\NuGet.Config
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run `dotnet build`'
+  inputs:
+    command: build
+    projects: '$(WorkingDirectory)\*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
+
+- task: DotNetCoreCLI@2
+  displayName: 'Run `dotnet test`'
+  inputs:
+    command: test
+    projects: 'tests\**\*.csproj'
+    arguments: '--configuration $(BuildConfiguration)'
