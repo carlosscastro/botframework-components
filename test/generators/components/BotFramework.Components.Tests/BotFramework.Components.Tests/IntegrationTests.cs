@@ -10,7 +10,7 @@ using Xunit;
 
 namespace BotFramework.Components.Tests
 {
-    public class UnitTest1
+    public class IntegrationTests
     {
         [Fact]
         public async Task TestCustomAction_MessagesEndpoint()

@@ -11,7 +11,7 @@ on:
       botbuilderVersion:
         description: 'Bot Framework SDK version to verify.'     
         required: true
-        default: '4.13.0-daily.20210327.228178.2d51159'
+        default: '4.13.2'
 
 # A workflow run is made up of one or more jobs that can run sequentially or in parallel
 jobs:
@@ -33,10 +33,12 @@ jobs:
       - name: Use Node.js '14.x'
         uses: actions/setup-node@v1
         
+
+      # For myget, also need to add the line below to the run command 
+      # # dotnet nuget add source https://botbuilder.myget.org/F/botbuilder-v4-dotnet-daily/api/v3/index.json
       - name: Dotnet build test component and add component as local nuget source
         working-directory: ./test/generators/components/BotFramework.Components.Tests/BotFramework.Components.TestComponents
         run: |
-          dotnet nuget add source https://botbuilder.myget.org/F/botbuilder-v4-dotnet-daily/api/v3/index.json
           dotnet build BotFramework.Components.TestComponents.csproj -property:BotBuilderVersion=${{ github.event.inputs.botbuilderVersion }}
           dotnet nuget add source '/home/runner/work/botframework-components/botframework-components/test/generators/components/BotFramework.Components.Tests/BotFramework.Components.TestComponents/outputpackages'
           dotnet nuget list source
