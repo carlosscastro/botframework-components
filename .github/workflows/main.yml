@@ -45,7 +45,7 @@ jobs:
         
       - name: Install yeoman
         run: |
-          npm install -g yo
+          npm install -g yo@3.1.0
         
       - name: Install generator
         working-directory: ./test/generators/generator-bot-test
